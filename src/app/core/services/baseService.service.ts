@@ -1,33 +1,19 @@
-import { HttpClient } from '@angular/common/http';
+import { ApiAbstract } from "./apiAbstract.service";
 
-export abstract class BaseService<T,Return,Post> {
-    
-    private route:string = ""
-    
-    constructor(http:HttpClient){
-        
-    }
+export abstract class BaseService<filters,Post> {
 
-    protected addRoute(route:string){
-        this.route = route;
-    }
-
-    get(id:string) : Return{
-        return  "" as Return
-    }
-
-    list(filters:T) : Return[]{
-        return  []
-    }
-
-    post(filters:Post) {
+    constructor(private apiAbstract:ApiAbstract){
 
     }
 
-    delete(id:string){
+    abstract get(id:string) : Post
 
-    }
+    abstract list(filters:filters):Post[]
 
+    abstract post(filters:Post):boolean
 
-         
+    abstract edit(filters:Post):boolean
+
+    abstract delete(id:string):boolean
+
 }
